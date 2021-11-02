@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Account\AccountController;
+use App\Http\Controllers\Api\Transaction\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('accounts')->group(function () {
+    Route::post('/create', [AccountController::class, 'create']);
+    Route::get('/{account}', [AccountController::class, 'show']);
+});
+
+Route::prefix('transactions')->group(function () {
+    Route::post('/create', [TransactionController::class, 'create']);
+    Route::get('/history/{account}', [TransactionController::class, 'history']);
 });

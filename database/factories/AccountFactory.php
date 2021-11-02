@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class AccountFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,7 +15,8 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
+            'user_id' => User::factory()->create()->id,
+            'amount' => $this->faker->randomFloat()
         ];
     }
 }
